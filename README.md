@@ -1,4 +1,4 @@
-## **1. 빅콘테스트 퓨처스리그 데이터분석 프로젝트🍊 **
+## 1. 빅콘테스트 퓨처스리그 데이터분석 프로젝트🍊
 
 - 팀명 : 재주도좋다
 
@@ -33,8 +33,7 @@
 
 ### 3. 가이드📲
 
-  파이참 환경이 구비되어 있다면, 위 GitHub코드를 수동으로 다운받거나 cmd창에서 repository를 git clone하여 local에서 바로 사용할 수 있습니다 .
-AWS을 통하여 웹페이지를 배포할 예정입니다.
+`pycharm-community`와 `python` 버전 3.6이상이 설치된 로컬에서 위 GitHub코드를 수동으로 다운받아 사용합니다. 또는 cmd창에서 해당 repository를 git clone하여 local에서 바로 사용할 수 있습니다 . AWS을 통하여 웹페이지를 배포할 예정입니다.
 
 [링크준비중]
 
@@ -139,7 +138,7 @@ AWS을 통하여 웹페이지를 배포할 예정입니다.
 
         : erd를 이용하여 mariadb의 구성도 작성
 
-        ![trickERD](md-images/image-20210818140239383.png)
+        ![trickERD](https://github.com/Songgplant/KDT-Semi_Project02/blob/master/md_images/trickERD.png)
 
       - django의 model.py를 이용하여 mariaDB와 연동 및 테이블 생성
         : 대표 Entity = user
@@ -161,18 +160,22 @@ AWS을 통하여 웹페이지를 배포할 예정입니다.
                 verbose_name_plural='개인 사용자'
         ```
 
+      - 설계 후 최종 생성한 Entity 목록 (Table 목록)
+      
+        ![tricktablecmd](https://github.com/Songgplant/KDT-Semi_Project02/blob/master/md_images/tricktablecmd.png)
+      
       - 사용자 로그인/회원가입 기능 생성 및 사용자 DB연동
         DB연동 방식 : Entity 생성 코드 입력 후 Terminal에서 실행
 
         ```
         python manage.py makemigrations, python manage.py migrate
         ```
-
+      
         연동 된 DB를 이용하여 로그인/회원가입과 연동
-
+      
       - 메인페이지 음식물 쓰레기 정보 DB 설계, 구축 및 연동
         models.py 에서 MySQL Entity 설계
-
+      
         ```python
         class wastedata(models.Model):
             data_id = models.AutoField(primary_key=True)
@@ -192,18 +195,16 @@ AWS을 통하여 웹페이지를 배포할 예정입니다.
                 verbose_name ='food waste data'
                 verbose_name_plural='food waste data'
         ```
-
-        views.py로 연결
-
+      
+        views.py로 연결 : 설계한 모든 Entity를 import
+      
         ```python
         from EcoJeju.models import user, worker, wastedata, region, disposedata, workerarea, wasteprediction
         allwaste = wastedata.objects.all();
         ```
 
         
-
-        
-
+      
    2. 공통 컬럼으로 데이터 셋 병합 및 상관관계 분석
       - emd_cd, emd_nm 기준으로 통합
         [0812&#95;데이터셋 통합&#95;상관관계분석.ipynb](https://github.com/Songgplant/KDT-Semi_Project02/blob/master/Jypyternotebook/0812_%EB%8D%B0%EC%9D%B4%ED%84%B0%EC%85%8B%20%ED%86%B5%ED%95%A9_%EC%83%81%EA%B4%80%EA%B4%80%EA%B3%84%EB%B6%84%EC%84%9D.ipynb)
@@ -271,18 +272,23 @@ AWS을 통하여 웹페이지를 배포할 예정입니다.
 
    2. Front-end 화면 구성 및 설계
       - 사용자/관리자/공용 UI/UX 구성
-        
+
+   
 
 5. 8월 16일 ~ 17일 :
 
-   1. 가공한 데이터셋을 기반으로 분석 결과 시각화
-      : 공용 페이지와 사용자 페이지 setting
+   1. 추가적인 DB 구축 및 시스템 구성 정리
+      
+      - 음식물쓰레기DB & 사용자DB & 관리자DB & 알고리즘기반 예측 데이터DB 구축 및 연동
+      
+   2. 가공한 database, dataset을 기반으로 분석 결과 시각화
+      : `공용 페이지` `사용자 페이지` `관리자 페이지` setting
 
       - static -> app.js 파일 내 그래프(init+'그래프명') 기본 함수 세팅
-        javascript, ajax 위주로 그래프별 내장 function 생성 후 data를 연결. 차트 기본요소는 js와 css로 생성 후 브라우저 구성 html div class name으로 연결
+        -> javascript, ajax 위주로 그래프별 내장 function 생성 후 data를 연결. 차트 기본요소는 js와 css로 생성 후 브라우저 구성 html div class name으로 연결
 
         ```js
-        (function () {
+        function () {
           'use strict';
           $(initFlotSpline);
           function initFlotSpline() {
@@ -308,7 +314,7 @@ AWS을 통하여 웹페이지를 배포할 예정입니다.
         ```
 
         - 사용자의 활용 목적에 따라 그래프 생성
-          dashboard.html
+          dashboard.html - class="app.js에서 생성한 차트"
 
         ```html
         <!-- START card-->
@@ -327,20 +333,31 @@ AWS을 통하여 웹페이지를 배포할 예정입니다.
         <!-- END card-->
         ```
 
-   2. 추가적인 DB 구축 및 시스템 구성방법 확정
-      - 음식물쓰레기DB & 사용자DB & 관리자DB & 알고리즘기반 예측 데이터DB 구축 및 연동
-
    3. 포트폴리오 제작
-      - README.md, 코드 정리 및 디버깅
+      - README.md 작성, 코드 정리 및 디버깅, , 완료보고서 PT 제작
+
+      
 
 6. 8월 18일 ~ 19일 :
-   1. 가공한 데이터셋을 기반으로 분석 결과 시각화
-      : 관리자 페이지 setting
+
    2. 최종 브라우저 UI
-      [ppt이미지1]
-      [ppt이미지2]
-      [ppt이미지3]
-   3. 최종 포트폴리오, 완료보고서 PT제작
+      
+      공용 메인 페이지 구성
+      ![trickmainui](https://github.com/Songgplant/KDT-Semi_Project02/blob/master/md_images/trickmainui.png)
+      
+      사용자 페이지 구성
+      
+      ![trickuserui](https://github.com/Songgplant/KDT-Semi_Project02/blob/master/md_images/trickuserui.png)
+      
+      관리자 페이지 구성
+      ![trickmanagerui](https://github.com/Songgplant/KDT-Semi_Project02/blob/master/md_images/trickmanagerui.png)
+      
+   2. 최종 포트폴리오, 완료보고서 PT제작
+
+   
 
 7. 8월 20일 : 1차 최종 점검 및 발표
-8. 8월 31일 : 경진대회 사전 보고서 제출마감(평가반영)
+
+
+
+2. 8월 31일 : 경진대회 사전 보고서 제출마감(평가반영)
