@@ -322,10 +322,10 @@
         ```html
         <!-- START card-->
         <div class="card card-default card-demo" id="cardChart9">
-        	<div class="card-header">
+            <div class="card-header">
                 <a class="float-right" href="#" data-tool="card-refresh" data-toggle="tooltip" title="Refresh card"><em class="fas fa-sync"></em></a>
                 <a class="float-right" href="#" data-tool="card-collapse" data-toggle="tooltip" title="Collapse card"><em class="fa fa-minus"></em></a>
-           		<div class="card-title">2021년 월별 음식물 쓰레기 배출량 Chart</div>
+                <div class="card-title">2021년 월별 음식물 쓰레기 배출량 Chart</div>
             </div>
             <div class="card-wrapper">
                 <div class="card-body">
